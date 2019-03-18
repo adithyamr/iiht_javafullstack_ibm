@@ -105,7 +105,22 @@ Annotations
 	- Information for the compiler
 	- Compile-time and deployment-time processing
 	- Runtime Processing
+	
+	[Predefined Annotations]
+	- @Deprecated
+	- @Override
+	- @SuppressWarnings
+	- @SafeVarArgs
+	- @FunctionalInterface
 
+	[Custom Annotations]
+	[Meta Annotations]
+	- @Documented
+	- @Inherited
+	- @Retention
+	- @Target
+	- @Repeatable
+	
 Nested/Inner Classes
 	- A nested class is a member of its enclosing class.
 	- Non-static nested classes (inner classes) have access to other members of the enclosing class, even if they are declared private.
