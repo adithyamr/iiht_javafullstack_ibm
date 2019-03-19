@@ -1,7 +1,7 @@
 #Start DB Server
 --run in background
 %MYSQL_HOME%\bin\mysqld --defaults-file=<defaults-file-path>
-mysqld --defaults-file="C:\Program Files\MySQL\mysql-5.7.25\default.ini"
+mysqld --defaults-file="C:\Program Files\MySQL\mysql-5.7.25\my.ini"
 
 "C:\Program Files\MySQL\MySQL Server 5.7\bin\mysqld.exe" --defaults-file="C:\Program Files\MySQL\MySQL Server 5.7\my.ini"
 

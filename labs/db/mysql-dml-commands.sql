@@ -9,9 +9,11 @@ INSERT INTO EMPLOYEE (NAME, AGE, GENDER, SALARY, DESIGNATION, DEPARTMENT, COUNTR
 INSERT INTO EMPLOYEE (NAME, AGE, GENDER, SALARY, DESIGNATION, DEPARTMENT, COUNTRY_ID) VALUES('Mathes',35,'M',60000,'Function Head','HR',1);
 INSERT INTO EMPLOYEE (NAME, AGE, GENDER, SALARY, DESIGNATION, DEPARTMENT, COUNTRY_ID) VALUES('Sinthura',27,'F',40000,'Lead','Operations',2);
 INSERT INTO EMPLOYEE (NAME, AGE, GENDER, SALARY, DESIGNATION, DEPARTMENT, COUNTRY_ID) VALUES('Sunil',50,'M',70000,'President','Delivery',3);
+INSERT INTO EMPLOYEE (NAME, AGE, GENDER, SALARY, DESIGNATION, DEPARTMENT, COUNTRY_ID) VALUES('Mukesh',40,'M',70000,'President','Delivery',3);
 
 -- LOAD COUNTRY DATA FROM LOCAL FILE
-LOAD DATA LOCAL INFILE 'D:/Training/iiht_javafullstack_ibm/labs/db/data/country.txt' INTO TABLE COUNTRY;
+LOAD DATA LOCAL INFILE 'D:/Training/iiht_javafullstack_ibm/labs/db/data/country.txt' INTO TABLE COUNTRY FIELDS TERMINATED BY ',';
+LOAD DATA LOCAL INFILE 'D:/Training/iiht_javafullstack_ibm/labs/db/data/employee.txt' INTO TABLE EMPLOYEE FIELDS TERMINATED BY ',';
 
 #SELECT data syntax
 # SELECT <FIELDNAMES> 
@@ -74,7 +76,20 @@ SELECT *
 #SORT BY DEPARTMENT AND AGE	
 SELECT *
 	FROM EMPLOYEE
-	ORDER BY DEPARTMENT DESC, AGE DESC;
+	ORDER BY DEPARTMENT DESC, AGE DESC;	
+
+#Designation wise employee count
+SELECT designation,COUNT(*) as 'Emp Count'
+	FROM Employee
+    GROUP BY designation;
+
+#List designations have average salary greater than 50000
+SELECT designation, avg(salary) AS avg_sal
+	FROM Employee
+    GROUP BY designation
+	HAVING avg_sal > 50000
+	ORDER BY avg_sal DESC
+	LIMIT 1;
     
 #Department wise employee count
 SELECT department,COUNT(*)
@@ -95,7 +110,6 @@ SELECT department,COUNT(*) AS empCount
 
 #Case Insensitive Match using String functions   
 SELECT id, name FROM employee WHERE UPPER(name) = UPPER('kuMar');    
-
 
 # Table joins - Fetch Employee and Country details based on COUNTRY_ID and specific COUNTRY_CODE
 SELECT 
@@ -128,11 +142,40 @@ SELECT
 FROM
     EMPLOYEE e
         RIGHT OUTER JOIN
-    COUNTRY c ON e.COUNTRY_ID = c.ID AND c.code = 'IND';  
+    COUNTRY c ON e.COUNTRY_ID = c.ID AND c.code = 'IND';
+	
+# Full Outer Join - with UNION
+SELECT 
+    e.ID, e.NAME, e.DEPARTMENT, c.NAME AS 'Country Name'
+FROM
+    EMPLOYEE e
+        LEFT OUTER JOIN
+    COUNTRY c ON e.COUNTRY_ID = c.ID AND c.code = 'IND'
+UNION
+SELECT 
+    e.ID, e.NAME, e.DEPARTMENT, c.NAME AS 'Country Name'
+FROM
+    EMPLOYEE e
+        RIGHT OUTER JOIN
+    COUNTRY c ON e.COUNTRY_ID = c.ID AND c.code = 'IND';
+
+#Multi key condition	
+SELECT * FROM EMPLOYEE WHERE DEPARTMENT = 'IT' OR SALARY > 25000;
+
+#Multi key condition decomposed as union operation
+SELECT * FROM EMPLOYEE WHERE DEPARTMENT = 'IT' UNION SELECT * FROM EMPLOYEE WHERE SALARY > 25000;
+
+# Uncorrelated Subquery to fetch employees belongs to India
+SELECT * FROM EMPLOYEE WHERE COUNTRY_ID IN (SELECT ID FROM COUNTRY WHERE CODE = 'IND');
     
-    
-# Subquery to fetch COUNTRY name
-SELECT e.ID, e.NAME, e.DEPARTMENT, (SELECT c.Name FROM COUNTRY c WHERE e.COUNTRY_ID = c.ID) as "Country Name" FROM EMPLOYEE e WHERE e.COUNTRY_ID = (SELECT c.ID FROM COUNTRY c WHERE e.COUNTRY_ID = c.ID);
+# Correlated Subquery to fetch COUNTRY name
+SELECT e.ID, e.NAME, e.DEPARTMENT, (SELECT c.Name FROM COUNTRY c WHERE c.ID=e.COUNTRY_ID) as "Country Name" FROM EMPLOYEE e WHERE e.COUNTRY_ID = (SELECT c.ID FROM COUNTRY c WHERE e.COUNTRY_ID = c.ID);
+
+# Correlated Subquery to fetch employee details with country name belongs to India
+SELECT * FROM EMPLOYEE e WHERE e.COUNTRY_ID = (SELECT c.ID FROM COUNTRY c WHERE e.COUNTRY_ID = c.ID AND c.CODE = 'IND');
+
+# EXISTS
+SELECT * FROM EMPLOYEE e1 WHERE EXISTS (SELECT ID FROM EMPLOYEE1 e2 WHERE e1.ID = e2.ID);
 
 #UPDATE statement syntax
 #UPDATE <TABLENAME>
@@ -140,11 +183,11 @@ SELECT e.ID, e.NAME, e.DEPARTMENT, (SELECT c.Name FROM COUNTRY c WHERE e.COUNTRY
 #        WHERE <FILTER>;
         
 Update Employee set country='INDIA' where ID=6;
-Update Employee set DEPARTMENT='IT' where ID=6;        
-
+UPDATE EMPLOYEE e SET DEPARTMENT='HR',DESIGNATION='Developer' WHERE e.COUNTRY_ID = (SELECT ID FROM COUNTRY c WHERE e.COUNTRY_ID = c.ID and c.CODE='IND')
 
 #TRUNCATE TABLE DATA
 TRUNCATE EMPLOYEE;
 
 #DELETE SPECIFIC RECORDS
-DELETE FROM EMPLOYEE WHERE ID = 7;  
+DELETE FROM EMPLOYEE AS e WHERE e.ID = 7; 
+DELETE FROM EMPLOYEE WHERE COUNTRY_ID = (SELECT ID FROM COUNTRY WHERE COUNTRY_ID = ID and CODE='IND'); 
