@@ -1,0 +1,58 @@
+ibm-fsd-frontend
+	|
+	|____	labs
+	|
+	|____ 	assignments
+
+ibm-fsd-backend
+	|
+	|____	labs
+			|
+			|__ CoreJava
+			|
+			|__ Jdbc
+			|
+			|__ SpringCore
+			|
+			|__ SpringMvc
+			|
+			|__ SpringBoot
+			|
+			|__ SpringCloud
+	|
+	|____ 	assignments
+			|
+			|___ PrimeNumber
+			|
+			|___ OddEven
+			|
+			|___ SwapNumber
+			|
+			|___ EmployeeOOPs
+			|
+			|___ EmployeeManager01
+			|
+			|___ EmployeeManager02
+			|
+			|___ EmployeeManager03
+			|
+			|___ LambdaCalc
+			|
+			|___ EmployeeManagementApp01
+			|
+			|___ EmployeeManagementApp02
+	
+ibm-fsd-database
+	|
+	|____	labs
+	|
+	|____ 	assignments
+				|
+				|___ Assignment01
+				|
+				|___ Assignment02
+						.
+						.
+						.
+	
+	
