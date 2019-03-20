@@ -21,26 +21,34 @@ ibm-fsd-backend
 			|__ SpringCloud
 	|
 	|____ 	assignments
-			|
-			|___ PrimeNumber
-			|
-			|___ OddEven
-			|
-			|___ SwapNumber
-			|
-			|___ EmployeeOOPs
-			|
-			|___ EmployeeManager01
-			|
-			|___ EmployeeManager02
-			|
-			|___ EmployeeManager03
-			|
-			|___ LambdaCalc
-			|
-			|___ EmployeeManagementApp01
-			|
-			|___ EmployeeManagementApp02
+				|
+				|__CoreJava
+					|
+					|___ PrimeNumber
+					|
+					|___ OddEven
+					|
+					|___ SwapNumber
+					|
+					|___ EmployeeOOPs
+					|
+					|___ EmployeeManager01
+					|
+					|___ EmployeeManager02
+					|
+					|___ EmployeeManager03
+					|
+					|___ LambdaCalc
+					|
+					|___ EmployeeManagementApp01
+					|
+					|___ EmployeeManagementApp02
+				|
+				|__Spring
+				|
+				|__SpringBoot
+				|
+				|__SpringCloud
 	
 ibm-fsd-database
 	|
