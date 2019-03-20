@@ -15,64 +15,107 @@ public class JdbcWithDataSourceEx {
 
 		Connection conn = null;
 		Statement stmt = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		try {
 			// STEP 2: Create Datasource instance
 			MysqlDataSource dataSource = new MysqlDataSource();
 			dataSource.setDatabaseName("jdbctraining");
 			dataSource.setUser("training");
 			dataSource.setPassword("training");
-			dataSource.setServerName("localhost");			
+			dataSource.setServerName("localhost");
 
 			// STEP 3: Open a connection
-			System.out.println("Connecting to database...");			
+			System.out.println("Connecting to database...");
 			conn = dataSource.getConnection();
+			conn.setAutoCommit(false); // enable transaction
+
+			System.out.println("Connection estabilished: " + conn);
 
 			// STEP 4: Execute a query
 			System.out.println("Creating statement...");
 			stmt = conn.createStatement();
 
-			String sql1, sql2;
-			sql1 = "SELECT id, name, age, designation FROM employee";
-//			 sql1 = "SELECT id, name, age FROM employee WHERE age >= 35 AND department='Admin' ORDER BY name";
-			sql2 = "UPDATE employee SET designation=? WHERE id=?";
+			// Insertion with Statement
+//			String insertQuery = "INSERT INTO employee (name, age, designation, department, country) VALUES ('Anil', 30, 'Developer', 'Admin', 'India')";
+//			//boolean status = stmt.execute(insertQuery);
+//			int insertCount = stmt.executeUpdate(insertQuery);
+//			System.out.println("Employee inserted " + insertCount);
 
-			PreparedStatement pstmt = conn.prepareStatement(sql2);
-			pstmt.setString(1, "Manager");
+			// Insertion with Prepared Statement
+			String insertQueryForPrepareStmt = "INSERT INTO employee (name, age, designation, department, country) VALUES (?, ?, ?, ?, ?)";
+			pstmt = conn.prepareStatement(insertQueryForPrepareStmt);
+			pstmt.setString(1, "Mathew");
+			pstmt.setInt(2, 30);
+			pstmt.setString(3, "Lead");
+			pstmt.setString(4, "IT");
+			pstmt.setString(5, "India");
+			int insertCount = pstmt.executeUpdate();
+			pstmt.close();
+			System.out.println(insertCount + " Employee(s) inserted");
+
+			// Updation with Prepared Statement
+			String updateQuery = "UPDATE employee SET designation = ? WHERE id = ?";
+			pstmt = conn.prepareStatement(updateQuery);
+			pstmt.setString(1, "Software Engineer");
 			pstmt.setInt(2, 1);
+			int updateCount = pstmt.executeUpdate();
+			pstmt.close();
+			System.out.println(updateCount + " Employee(s) updated");
 
-//			boolean status = stmt.execute(sql2);
-			boolean status = pstmt.execute();
-			System.out.println("Update status: " + status);
-			ResultSet rs = stmt.executeQuery(sql1);
+			// Deletion with Prepared Statement
+			String deleteQuery = "DELETE FROM employee WHERE id = ?";
+			pstmt = conn.prepareStatement(deleteQuery);
+			pstmt.setInt(1, 2);
+			int deleteCount = pstmt.executeUpdate();
+			pstmt.close();
+			System.out.println(deleteCount + " Employee(s) updated");
+
+			// persist the changes
+			conn.commit();
+
+			String selectQuery = "SELECT * FROM employee";
+			rs = stmt.executeQuery(selectQuery);
 
 			// STEP 5: Extract data from result set
+			// Header
+			System.out.format("\t%s \t%s \t%s \t%s \t%s \t%s\n", "Id", "Age", "Name", "Designation", "Department",
+					"Country");
 			while (rs.next()) {
 				// Retrieve by column name
 				int id = rs.getInt("id");
 				int age = rs.getInt("age");
 				String name = rs.getString("name");
 				String designation = rs.getString("designation");
+				String department = rs.getString("department");
+				String country = rs.getString("country");
 
 				// Display values
-				System.out.print("ID: " + id);
-				System.out.print(", Age: " + age);
-				System.out.print(", Name: " + name);
-				System.out.print(", Designation: " + designation);
-
-				System.out.println();
+				System.out.format("\t%d \t%d \t%s \t%s \t%s \t%s\n", id, age, name, designation, department, country);
 			}
-			// STEP 6: Clean-up environment
-			rs.close();
-			stmt.close();
-			conn.close();
+
 		} catch (SQLException se) {
 			// Handle errors for JDBC
 			se.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e) {
+			}
 		} catch (Exception e) {
 			// Handle errors for Class.forName
 			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException sqle) {
+			}
 		} finally {
 			// finally block used to close resources
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException se2) {
+			}
 			try {
 				if (stmt != null)
 					stmt.close();

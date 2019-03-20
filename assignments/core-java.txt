@@ -1,6 +1,16 @@
 Assignment 1: Create a simple prime number program
 Assignment 2: Create a simple odd even number program
 Assignment 3: Create a swap of two numbers program
-Assignment 4: Create EmployeeManager program to perform CRUD operations using Arrays
-Assignment 5: Create EmployeeManager program to perform CRUD operations using Collections
-Assignment 6: Create EmployeeManagement console application to perform CRUD operations (with Validation and Exception Handling)
+Assignment 4: Create Employee class hierarchy with implementing object oriented programming concepts
+Assignment 5: Create EmployeeManager program to perform CRUD operations using Arrays
+Assignment 6: Create EmployeeManager program to perform CRUD operations using Collections
+Assignment 7: Create Generic Employee class type and perform CRUD operation
+Assignment 8: Create EmployeeManagement console application to perform CRUD operations (with Validation and Exception Handling)
+Assignment 9: Create simple calculator using Lambda Expressions with standard functional interfaces
+Assignment 10: Enhance Employee Management Application to perform validations using Lambda Expressions
+Assignment 11: Enhance Employee Management Application to show various statistics (e.g: avg salary, group by dept, dept wise avg salary, list departments having more than given no of employees, etc.) using Stream API
+Assignment 12: Enhance Employee Management Application to support Import Employee details from file and Export Employee details to file
+Assignment 13: Enhance Employee Management Application to run Import and Export functionality as separate threads with Java Concurrent API
+Assignment 14: Enhance Employee Management Application to persist data into database using JDBC
+
+

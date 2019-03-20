@@ -18,8 +18,8 @@ public class Consumer implements Runnable{
 		while(true) {
 			try {
 				while(!buffer.hasValue()) {
-					synchronized(buffer) {
-						buffer.wait();
+					synchronized(buffer) {  // Acquiring the lock
+						buffer.wait(); // Releasing the lock and wait
 					}
 				}
 			} catch (InterruptedException e) {
@@ -28,8 +28,8 @@ public class Consumer implements Runnable{
 			}
 			double d = buffer.getValue();
 			System.out.println(Thread.currentThread().getName() + " consumed " + d);
-			synchronized(buffer) {
-				buffer.notify();
+			synchronized(buffer) { // Acquiring the lock
+				buffer.notify(); // Notifiying the waiting threads
 			}
 		}
 		System.out.println(Thread.currentThread().getName() + " -->Stop thread");

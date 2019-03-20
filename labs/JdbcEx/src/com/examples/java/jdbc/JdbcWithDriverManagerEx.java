@@ -14,8 +14,8 @@ public class JdbcWithDriverManagerEx {
 	static final String DB_URL = "jdbc:mysql://localhost:3306/jdbctraining";
 
 	// Database credentials
-	static final String USER = "training"; // root
-	static final String PASS = "training"; // pass@word1
+	static final String USER = "training";
+	static final String PASS = "training";
 
 	public static void main(String[] args) {
 
@@ -31,6 +31,7 @@ public class JdbcWithDriverManagerEx {
 			// STEP 3: Open a connection
 			System.out.println("Connecting to database...");
 			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+			conn.setAutoCommit(false); // enable transaction
 
 			System.out.println("Connection estabilished: " + conn);
 
@@ -51,24 +52,30 @@ public class JdbcWithDriverManagerEx {
 			pstmt.setInt(2, 30);
 			pstmt.setString(3, "Lead");
 			pstmt.setString(4, "IT");
-			pstmt.setString(5, "India");			
+			pstmt.setString(5, "India");
 			int insertCount = pstmt.executeUpdate();
+			pstmt.close();
 			System.out.println(insertCount + " Employee(s) inserted");
-			
+
 			// Updation with Prepared Statement
 			String updateQuery = "UPDATE employee SET designation = ? WHERE id = ?";
 			pstmt = conn.prepareStatement(updateQuery);
 			pstmt.setString(1, "Software Engineer");
-			pstmt.setInt(2, 1);			
+			pstmt.setInt(2, 1);
 			int updateCount = pstmt.executeUpdate();
+			pstmt.close();
 			System.out.println(updateCount + " Employee(s) updated");
-			
+
 			// Deletion with Prepared Statement
 			String deleteQuery = "DELETE FROM employee WHERE id = ?";
 			pstmt = conn.prepareStatement(deleteQuery);
-			pstmt.setInt(1, 2);			
+			pstmt.setInt(1, 2);
 			int deleteCount = pstmt.executeUpdate();
-			System.out.println(deleteCount + " Employee(s) updated");			
+			pstmt.close();
+			System.out.println(deleteCount + " Employee(s) updated");
+
+			// persist the changes
+			conn.commit();
 
 			String selectQuery = "SELECT * FROM employee";
 			rs = stmt.executeQuery(selectQuery);
@@ -93,20 +100,20 @@ public class JdbcWithDriverManagerEx {
 		} catch (SQLException se) {
 			// Handle errors for JDBC
 			se.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e) {}
 		} catch (Exception e) {
 			// Handle errors for Class.forName
 			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException sqle) {}			
 		} finally {
 			// finally block used to close resources
 			try {
 				if (rs != null) {
 					rs.close();
-				}
-			} catch (SQLException se2) {
-			}
-			try {
-				if (pstmt != null) {
-					pstmt.close();
 				}
 			} catch (SQLException se2) {
 			}
