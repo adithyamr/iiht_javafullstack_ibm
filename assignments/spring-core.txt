@@ -1,0 +1,3 @@
+ASSIGNMENT 1: Create Spring application to display Employee details having different data types (Primitive, Reference [Address], Date, Collection) using XML Configuration
+ASSIGNMENT 2: Create Spring application to display Employee details having different data types (Primitive, Reference [Address], Date, Collection) with Autowiring using XML Configuration
+ASSIGNMENT 3: Migrate Java Console based Employee Management Application to Spring Console based Employee Management Application with same functionality
