@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Enumeration;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,9 +22,31 @@ public class EmployeeRegistrationServlet extends HttpServlet {
 	 * Called when getting loaded into web container
 	 * We can specify the initialization logic here.
 	 */
-	public void init()
+	public void init(ServletConfig config)
 	{
 		System.out.println("EmployeeRegistration Servlet Initialized...");
+		
+		// Display Servlet Config parameters
+		//ServletConfig config = getServletConfig();
+		System.out.println("Servlet Config Parameters.....");
+		Enumeration<String> paramNames = config.getInitParameterNames();
+		while(paramNames.hasMoreElements())
+		{
+			String paramName = paramNames.nextElement();
+			System.out.println(paramName + ": " + config.getInitParameter(paramName));
+		}
+		
+		// Display Servlet context parameters		
+		ServletContext context = config.getServletContext();
+		System.out.println("Servlet Context Parameters.....");
+		Enumeration<String> ctxParamNames = context.getInitParameterNames();
+		while(ctxParamNames.hasMoreElements())
+		{
+			String ctxParamName = ctxParamNames.nextElement();
+			System.out.println(ctxParamName + ": " + context.getInitParameter(ctxParamName));
+		}		
+		
+
 	}
 	
 	public void doGet(HttpServletRequest request,  HttpServletResponse response) throws IOException
@@ -38,6 +62,7 @@ public class EmployeeRegistrationServlet extends HttpServlet {
 	{
 		
 		HttpSession session = request.getSession();
+		
 		
 		System.out.println("Session ID: " + session.getId());
 		
