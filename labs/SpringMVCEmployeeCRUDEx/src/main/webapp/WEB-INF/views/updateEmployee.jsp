@@ -34,7 +34,7 @@
 
 	<h2>Update Employee</h2>
 	<form:form method="POST"
-		action="/SpringMVCEmployeeCRUDEx/employee/update"
+		action="${contextPath}/employee/update"
 		modelAttribute="employee">
 		<form:errors path="*" cssClass="errorblock" element="div" />
 		<table>
