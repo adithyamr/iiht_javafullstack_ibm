@@ -43,8 +43,31 @@ ibm-fsd-backend
 					|___ EmployeeManagementApp01
 					|
 					|___ EmployeeManagementApp02
+				|		
+				|__ServletJsp
+					|
+					|___ ServletAnnotationConfig
+					|
+					|___ EmployeeManagementApp04					
 				|
 				|__Spring
+					|
+					|__ Core					
+						|
+						|___ EmployeeXmlConfig
+						|
+						|___ EmployeeXmlConfigAutoWire
+						|
+						|___ EmployeeAnnotationConfig
+						|					
+						|___ EmployeeJavaConfig
+						|
+						|___ EmployeeManagementApp03
+					|
+					|__ MVC					
+						|
+						|___ EmployeeManagementApp05
+						
 				|
 				|__SpringBoot
 				|

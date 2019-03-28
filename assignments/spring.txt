@@ -1,5 +1,14 @@
+[SPRING CORE]
+==============
 ASSIGNMENT 1: Create Spring application to display Employee details having different data types (Primitive, Reference [Address], Date, Collection) using XML Configuration
 ASSIGNMENT 2: Create Spring application to display Employee details having different data types (Primitive, Reference [Address], Date, Collection) with Autowiring using XML Configuration
 ASSIGNMENT 3: Migrate Java Console based Employee Management Application to Spring Console based Employee Management Application with same functionality
 ASSIGNMENT 4: Create Spring application to display Employee details having different data types (Primitive, Reference [Address], Date, Collection) using Annotation Based Configuration
 ASSIGNMENT 5: Create Spring application to display Employee details having different data types (Primitive, Reference [Address], Date, Collection) using Java Based Configuration
+
+[SPRING MVC]
+============
+ASSIGNMENT 1: Enhance Spring MVC Employee Management webapp with below features
+		   a) Allow users to register in the application and authenticate based on that
+		   b) Implement form validation using Bean Validation API
+		   c) Configure to use ResourceBundle ViewResolver
