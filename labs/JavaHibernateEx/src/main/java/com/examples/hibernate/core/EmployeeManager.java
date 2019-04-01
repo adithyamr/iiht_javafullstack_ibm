@@ -3,6 +3,7 @@ package com.examples.hibernate.core;
 import java.util.Iterator;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -39,18 +40,23 @@ public class EmployeeManager {
 		emp.setCountry("India");
 
 		listEmployees();
-		
+
 		Integer empId1 = createEmployee(emp);
-		
+
 		listEmployees();
-		
+
 		updateEmployee(empId1, "Admin", "Software Engineer");
-		
+
 		listEmployees();
-		
+
 		deleteEmployee(empId1);
-		
+
 		listEmployees();
+
+		// Uncomment to test different query types
+//		listEmployeesWithNativeQuery();
+//		listEmployeesWithHSQL();
+//		listEmployeesWithCriteria();
 
 	}
 
@@ -65,9 +71,9 @@ public class EmployeeManager {
 
 			// Insert data into table by supplying the persistent object
 			id = (Integer) session.save(employee);
-			
+
 			System.out.println("\nEmployee inserted successfully with ID - " + id);
-			
+
 			tnx.commit();
 		} catch (HibernateException he) {
 			tnx.rollback();
@@ -75,32 +81,6 @@ public class EmployeeManager {
 		}
 
 		return id;
-	}
-
-	// LIST EMPLOYEE DETAILS
-	private static void listEmployees() {
-		Transaction tnx = null;
-
-		try (Session session = factory.openSession()) {
-			tnx = session.beginTransaction();
-
-			// List Employee Details
-			List<Employee> employees = session.createQuery("FROM Employee").list();
-
-			System.out.println("ID \tName \tAge \tGender \tDepartment \tDesignation");
-			for (Iterator<Employee> iterator = employees.iterator(); iterator.hasNext();) {
-				Employee employee = (Employee) iterator.next();
-
-				System.out.println(employee.getId() + "\t" + employee.getName() + "\t" + employee.getAge() + "\t"
-						+ employee.getGender() + "\t" + employee.getDepartment() + "\t" + employee.getDesignation());
-			}
-
-			tnx.commit();
-
-		} catch (HibernateException he) {
-			tnx.rollback();
-			he.printStackTrace();
-		}
 	}
 
 	// UPDATE EMPLOYEE DETAILS
@@ -145,6 +125,89 @@ public class EmployeeManager {
 			tnx.rollback();
 			he.printStackTrace();
 		}
+	}
+
+	private static void listEmployees() {
+		listEmployeesWithHSQL();
+	}
+
+	// LIST EMPLOYEE DETAILS WITH HQL QUERY
+	private static void listEmployeesWithHSQL() {
+		Transaction tnx = null;
+
+		try (Session session = factory.openSession()) {
+			tnx = session.beginTransaction();
+
+			// List Employee Details
+			List<Employee> employees = session.createQuery("FROM Employee").list();
+
+			System.out.println("ID \tName \tAge \tGender \tDepartment \tDesignation");
+			for (Iterator<Employee> iterator = employees.iterator(); iterator.hasNext();) {
+				Employee employee = (Employee) iterator.next();
+
+				System.out.println(employee.getId() + "\t" + employee.getName() + "\t" + employee.getAge() + "\t"
+						+ employee.getGender() + "\t" + employee.getDepartment() + "\t" + employee.getDesignation());
+			}
+
+			tnx.commit();
+
+		} catch (HibernateException he) {
+			tnx.rollback();
+			he.printStackTrace();
+		}
+	}
+
+	// LIST EMPLOYEE DETAILS WITH NATIVE QUERY
+	private static void listEmployeesWithNativeQuery() {
+		Transaction tnx = null;
+
+		try (Session session = factory.openSession()) {
+			tnx = session.beginTransaction();
+
+			// List Employee Details
+			List<Employee> employees = session.createNativeQuery("SELECT * FROM Employee", Employee.class).list();
+
+			System.out.println("ID \tName \tAge \tGender \tDepartment \tDesignation");
+			for (Iterator<Employee> iterator = employees.iterator(); iterator.hasNext();) {
+				Employee employee = (Employee) iterator.next();
+
+				System.out.println(employee.getId() + "\t" + employee.getName() + "\t" + employee.getAge() + "\t"
+						+ employee.getGender() + "\t" + employee.getDepartment() + "\t" + employee.getDesignation());
+			}
+
+			tnx.commit();
+
+		} catch (HibernateException he) {
+			tnx.rollback();
+			he.printStackTrace();
+		}
+	}
+
+	private static void listEmployeesWithCriteria() {
+		Session session = factory.openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			Criteria criteria = session.createCriteria(Employee.class);
+			List<Employee> employees = criteria.list();
+
+			System.out.println("ID \tName \tAge \tGender \tDepartment \tDesignation");
+			for (Iterator<Employee> iterator = employees.iterator(); iterator.hasNext();) {
+				Employee employee = (Employee) iterator.next();
+
+				System.out.println(employee.getId() + "\t" + employee.getName() + "\t" + employee.getAge() + "\t"
+						+ employee.getGender() + "\t" + employee.getDepartment() + "\t" + employee.getDesignation());
+			}
+
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+
 	}
 
 }
