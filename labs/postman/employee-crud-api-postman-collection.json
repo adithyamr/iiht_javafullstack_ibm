@@ -1,104 +1,169 @@
 {
-	"variables": [],
-	"info": {
-		"name": "REST Labs - Employee CRUD",
-		"_postman_id": "62b9f2c6-65ad-3a8e-7b35-cef1007a12d8",
-		"description": "",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
-	},
-	"item": [
+	"id": "2f0beb8f-ba3b-ce5c-438c-4342bbb0fa7a",
+	"name": "REST Labs - Employee CRUD",
+	"description": "",
+	"order": [
+		"35bfb78b-db47-af9c-b801-1cb3798bc984",
+		"9cf1a0b9-617a-06e1-f3bc-ebed545989cd",
+		"08294a85-a22a-16be-ddae-1fe5c307ef3d",
+		"5c23506d-ddc4-06bb-d3bd-292b2d16c2b7",
+		"5a5f7688-6de7-0130-843b-e2a9b069a7bc",
+		"06d8473a-fb43-747f-7ac6-fa07ea520840"
+	],
+	"folders_order": [],
+	"folders": [],
+	"owner": 0,
+	"hasRequests": true,
+	"requests": [
 		{
-			"name": "Employee CRUD - Login",
-			"request": {
-				"url": "http://localhost:8080/SpringRESTEmployeeCRUDEx/authenticate",
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\"userName\": \"admin\",\n\"password\": \"admin\"\n}\n"
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "Employee CRUD - Create",
-			"request": {
-				"url": "http://localhost:8080/SpringRESTEmployeeCRUDEx/employee",
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n\t\"name\": \"Kumar\",\r\n\t\"age\": 40,\r\n\t\"gender\": \"Male\",\r\n\t\"contractor\": false,\r\n\t\"skills\": [\"Technical\", \"Functional\"],\r\n\t\"designation\": \"Manager\",\r\n\t\"department\": \"Finance\",\r\n\t\"address\": \"Bengaluru\",\r\n\t\"country\": \"India\"\r\n}"
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "Employee CRUD - List",
-			"request": {
-				"url": "http://localhost:8080/SpringRESTEmployeeCRUDEx/employee",
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "Employee CRUD - Get Employee",
-			"request": {
-				"url": "http://localhost:8080/SpringRESTEmployeeCRUDEx/employee/7dbf4166-9b65-4a6a-8998-6c1c4fea9024",
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "Employee CRUD - Update",
-			"request": {
-				"url": "http://localhost:8080/SpringRESTEmployeeCRUDEx/employee/7dbf4166-9b65-4a6a-8998-6c1c4fea9024",
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n\t\"name\": \"Kumar\",\r\n\t\"age\": 45,\r\n\t\"gender\": \"Male\",\r\n\t\"contractor\": false,\r\n\t\"skills\": [\"Technical\", \"Functional\"],\r\n\t\"designation\": \"Manager\",\r\n\t\"department\": \"Finance\",\r\n\t\"address\": \"Bengaluru\",\r\n\t\"country\": \"India\"\r\n}"
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
+			"id": "06d8473a-fb43-747f-7ac6-fa07ea520840",
+			"headers": "",
+			"headerData": [],
+			"url": "http://localhost:8080/SpringRESTEmployeeCRUDEx/employees/ccbf88fb-34be-43da-ae3a-a8fed8163b8b",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "DELETE",
+			"data": [],
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1554093285587,
 			"name": "Employee CRUD - Delete",
-			"request": {
-				"url": "http://localhost:8080/SpringRESTEmployeeCRUDEx/employee/7dbf4166-9b65-4a6a-8998-6c1c4fea9024",
-				"method": "DELETE",
-				"header": [],
-				"body": {},
-				"description": ""
-			},
-			"response": []
+			"description": "",
+			"collectionId": "2f0beb8f-ba3b-ce5c-438c-4342bbb0fa7a",
+			"responses": []
+		},
+		{
+			"id": "08294a85-a22a-16be-ddae-1fe5c307ef3d",
+			"headers": "",
+			"headerData": [],
+			"url": "http://localhost:8080/SpringRESTEmployeeCRUDEx/employees",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1554093318776,
+			"name": "Employee CRUD - List",
+			"description": "",
+			"collectionId": "2f0beb8f-ba3b-ce5c-438c-4342bbb0fa7a",
+			"responses": []
+		},
+		{
+			"id": "35bfb78b-db47-af9c-b801-1cb3798bc984",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/SpringRESTEmployeeCRUDEx/authenticate",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1554093310230,
+			"name": "Employee CRUD - Login",
+			"description": "",
+			"collectionId": "2f0beb8f-ba3b-ce5c-438c-4342bbb0fa7a",
+			"responses": [],
+			"rawModeData": "{\n\"userName\": \"admin\",\n\"password\": \"admin@123\"\n}\n"
+		},
+		{
+			"id": "5a5f7688-6de7-0130-843b-e2a9b069a7bc",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/SpringRESTEmployeeCRUDEx/employees/ccbf88fb-34be-43da-ae3a-a8fed8163b8b",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1554093265834,
+			"name": "Employee CRUD - Update",
+			"description": "",
+			"collectionId": "2f0beb8f-ba3b-ce5c-438c-4342bbb0fa7a",
+			"responses": [],
+			"rawModeData": "{\r\n\t\"name\": \"Kumar\",\r\n\t\"age\": 45,\r\n\t\"gender\": \"Male\",\r\n\t\"contractor\": false,\r\n\t\"skills\": [\"Technical\", \"Functional\"],\r\n\t\"designation\": \"Manager\",\r\n\t\"department\": \"Finance\",\r\n\t\"address\": \"Bengaluru\",\r\n\t\"country\": \"India\"\r\n}"
+		},
+		{
+			"id": "5c23506d-ddc4-06bb-d3bd-292b2d16c2b7",
+			"headers": "",
+			"headerData": [],
+			"url": "http://localhost:8080/SpringRESTEmployeeCRUDEx/employees/ccbf88fb-34be-43da-ae3a-a8fed8163b8b",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1554093316357,
+			"name": "Employee CRUD - Get Employee",
+			"description": "",
+			"collectionId": "2f0beb8f-ba3b-ce5c-438c-4342bbb0fa7a",
+			"responses": []
+		},
+		{
+			"id": "9cf1a0b9-617a-06e1-f3bc-ebed545989cd",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/SpringRESTEmployeeCRUDEx/employees",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1554093201882,
+			"name": "Employee CRUD - Create",
+			"description": "",
+			"collectionId": "2f0beb8f-ba3b-ce5c-438c-4342bbb0fa7a",
+			"responses": [],
+			"rawModeData": "{\r\n\t\"name\": \"Kumar\",\r\n\t\"age\": 40,\r\n\t\"gender\": \"Male\",\r\n\t\"contractor\": false,\r\n\t\"skills\": [\"Technical\", \"Functional\"],\r\n\t\"designation\": \"Manager\",\r\n\t\"department\": \"Finance\",\r\n\t\"address\": \"Bengaluru\",\r\n\t\"country\": \"India\"\r\n}"
 		}
 	]
 }
