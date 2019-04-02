@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing 
+		infrastructure -->
+
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<mvc:annotation-driven />
+
+	<!-- Enables component scanning on the given and it's child packages -->
+	<context:component-scan	base-package="com.examples.spring.web.mvc" />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
+		up static resources in the ${webappRoot}/resources directory -->
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
+		in the /WEB-INF/views directory -->
+	<beans:bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+
+	<!-- Custom interceptor to configure session timeout interval -->
+	<mvc:interceptors>
+		<beans:bean
+			class="com.examples.spring.web.mvc.interceptor.SessionHandler" />
+	</mvc:interceptors>
+
+	<beans:bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+		<beans:property name="driverClassName"
+			value="com.mysql.jdbc.Driver" />
+		<beans:property name="url"
+			value="jdbc:mysql://localhost:3306/empapp" />
+		<beans:property name="username" value="training" />
+		<beans:property name="password" value="training" />
+	</beans:bean>
+
+	<!-- Hibernate 5 SessionFactory Bean definition -->
+	<beans:bean id="hibernate5AnnotatedSessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<!-- Datasource -->
+		<beans:property name="dataSource" ref="dataSource" />
+
+		<!-- Hibernate Properties -->
+		<beans:property name="hibernateProperties">
+			<beans:props>
+				<beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect
+				</beans:prop>
+				<beans:prop key="hibernate.show_sql">true</beans:prop>
+				<beans:prop key="hibernate.hbm2ddl.auto">create</beans:prop>
+			</beans:props>
+		</beans:property>
+		
+		<!-- Entity class List -->
+		<beans:property name="annotatedClasses">
+			<beans:list>
+				<beans:value>com.examples.spring.web.mvc.model.Employee</beans:value>
+				<beans:value>com.examples.spring.web.mvc.model.Country</beans:value>
+				<!-- <beans:value>com.examples.spring.web.mvc.model.Skill</beans:value>	 -->			
+			</beans:list>
+		</beans:property>		
+	</beans:bean>
+
+	<tx:annotation-driven
+		transaction-manager="transactionManager" />
+
+	<beans:bean id="transactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<beans:property name="sessionFactory"
+			ref="hibernate5AnnotatedSessionFactory" />
+	</beans:bean>
+
+	<!-- Exception handler mapping -->
+	<beans:bean
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<beans:property name="exceptionMappings">
+			<beans:props>
+				<beans:prop
+					key="com.examples.spring.web.mvc.exception.LoginException">
+					loginError
+				</beans:prop>
+				<beans:prop
+					key="com.examples.spring.web.mvc.exception.SpringException">
+					error
+				</beans:prop>
+				<beans:prop
+					key="org.hibernate.HibernateException">
+					dbError
+				</beans:prop>				
+			</beans:props>
+		</beans:property>
+		<beans:property name="defaultErrorView" value="error" />
+	</beans:bean>
+
+</beans:beans>
