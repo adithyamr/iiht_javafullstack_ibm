@@ -75,7 +75,6 @@ public class EmployeeManager {
 			Employee empForUpdate = entityManager.find(Employee.class, empId);
 			empForUpdate.setDepartment(dept);
 			empForUpdate.setDesignation(designation);
-			entityManager.persist(empForUpdate);
 
 			System.out.format("\nEmployee %s updated successfuly.\n", empId);
 
