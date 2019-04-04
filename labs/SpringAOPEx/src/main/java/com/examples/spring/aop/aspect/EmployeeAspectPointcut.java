@@ -8,8 +8,7 @@ import org.slf4j.LoggerFactory;
 
 @Aspect
 public class EmployeeAspectPointcut {
-	private static final Logger logger = LoggerFactory
-			.getLogger(EmployeeAspectPointcut.class);
+	private static final Logger logger = LoggerFactory.getLogger(EmployeeAspectPointcut.class);
 
 	@Before("getNamePointcut()")
 	public void loggingAdvice() {
@@ -25,21 +24,22 @@ public class EmployeeAspectPointcut {
 
 	@Pointcut("execution(public String get*())")
 	public void getNamePointcut() {
-		logger.info("Inside getNamePointcut() executing get*() in Genweb EmployeeAspectPointcut");
-		System.out.println("Inside getNamePointcut() executing get*() in Genweb EmployeeAspectPointcut");
+		logger.info("Inside getNamePointcut() executing get*()");
+		System.out.println("Inside getNamePointcut() executing get*()");
 	}
 
 	@Before("allMethodsPointcut()")
 	public void allServiceMethodsAdvice() {
-		logger.info("Inside allServiceMethodsAdvice() before allMethodsPointcut() from Genweb EmployeeAspectPointcut");
-		System.out.println("Inside allServiceMethodsAdvice() before allMethodsPointcut() from Genweb EmployeeAspectPointcut");
+		logger.info("Inside allServiceMethodsAdvice() before allMethodsPointcut()");
+		System.out.println(
+				"Inside allServiceMethodsAdvice() before allMethodsPointcut()");
 	}
 
 	// Pointcut to execute on all the methods of classes in a package
 	@Pointcut("within(com.examples.spring.aop.model.*)")
 	public void allMethodsPointcut() {
-		logger.info("within executing allMethodsPointcut() method from Genweb EmployeeAspectPointcut");
-		System.out.println("within executing allMethodsPointcut() method from Genweb EmployeeAspectPointcut");
+		logger.info("within executing allMethodsPointcut() method");
+		System.out.println("within executing allMethodsPointcut() method");
 	}
 
 }

@@ -9,27 +9,24 @@
 <!-- <aop:aspectj-autoproxy /> -->
 
 <!-- Configure Employee Bean and initialize it -->
-
  <bean name="employee" class="com.examples.spring.aop.model.Employee">
-	<property name="name" value="Genpact"></property>
+	<property name="name" value="Sendil"></property>
 </bean>
-
 
 <bean name="employeeService" class="com.examples.spring.aop.service.EmployeeService">
 	<property name="employee" ref="employee"></property>
 </bean>
 
 <!-- Configure Aspect Beans, without this Aspects advices wont execute -->
-
 <!-- Annotation based AOP configuration -->
-<!-- <bean name="employeeAspect" class="com.examples.spring.aop.aspect.EmployeeAspect"/>
-<bean name="employeeAspectPointcut" class="com.examples.spring.aop.aspect.EmployeeAspectPointcut"/>
-<bean name="employeeAspectJoinPoint" class="com.examples.spring.aop.aspect.EmployeeAspectJoinPoint"/>
-<bean name="employeeAfterAspect" class="com.examples.spring.aop.aspect.EmployeeAfterAspect"/>
-<bean name="employeeAroundAspect" class="com.examples.spring.aop.aspect.EmployeeAroundAspect"/>
-<bean name="employeeAnnotationAspect" class="com.examples.spring.aop.aspect.EmployeeAnnotationAspect"/> -->
+<!-- <bean name="employeeAspect" class="com.examples.spring.aop.aspect.EmployeeAspect"/> -->
+<!-- <bean name="employeeAspectPointcut" class="com.examples.spring.aop.aspect.EmployeeAspectPointcut"/> -->
+<!-- <bean name="employeeAspectJoinPoint" class="com.examples.spring.aop.aspect.EmployeeAspectJoinPoint"/>  -->
+<!-- <bean name="employeeAfterAspect" class="com.examples.spring.aop.aspect.EmployeeAfterAspect"/> -->
+<!-- <bean name="employeeAroundAspect" class="com.examples.spring.aop.aspect.EmployeeAroundAspect"/> -->
+<!-- <bean name="employeeAnnotationAspect" class="com.examples.spring.aop.aspect.EmployeeAnnotationAspect"/> -->
 
-
+<!-- Spring AOP XML Configuration Aspect Bean Definition-->
 <bean name="employeeXMLConfigAspect" class="com.examples.spring.aop.aspect.EmployeeXMLConfigAspect"/>
 
 <!-- Spring AOP XML Configuration -->
@@ -46,6 +43,5 @@
 		<aop:after-throwing method="afterThrow" pointcut-ref="selectException" throwing="ex"/>
 	</aop:aspect>
 </aop:config>
-
 
 </beans>

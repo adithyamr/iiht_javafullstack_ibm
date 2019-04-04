@@ -14,16 +14,16 @@ public class EmployeeAspect {
 		System.out.println("instance created");
 	}
 
-	@Before("execution(* set*(..))")
+	@Before("execution(* get*(..))")
 	public void getNameAdvice() {
 		logger.info("Executing Advice on getName()");
 		System.out.println("This is injected from Employee Aspect 1 for getName ");
 	}
 
 //	@Before("execution(* com.examples.spring.aop.model.Employee.setName(..))")
-//	// @Before("execution(public String getName())")
+////	@Before("execution(public String getName())")
 //	public void getAllAdvice() {
-//		logger.info("code injected into Genweb Portfolio controller list method");
-//		System.out.println("This is injected from Employee Aspect 2 for getName");
+//		logger.info("Executing Advice on setName and getName()");
+//		System.out.println("This is injected from Employee Aspect 2");
 //	}
 }
