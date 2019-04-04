@@ -12,6 +12,7 @@ WebServices
 	  - @RestController  <- @Controller + @ResponseBody
 	  - @RequestMapping -> Request Method, Path, Consumes / Produces -> @GetMapping, @PostMapping, etc..	  - 
 	  - @PathVariable
+	  - @RequestParam
 	  - @MatrixVariable
 	  - @RequestBody
 	  - @ResponseBody

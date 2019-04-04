@@ -17,6 +17,7 @@ JSP Actions
 	- GetProperty
 	- Include
 	- Forward
+	- Param
 
 Implicit Objects
 	- page

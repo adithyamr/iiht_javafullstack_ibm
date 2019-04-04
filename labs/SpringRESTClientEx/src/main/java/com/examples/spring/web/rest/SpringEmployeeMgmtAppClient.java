@@ -40,7 +40,8 @@ public class SpringEmployeeMgmtAppClient {
 		ResponseEntity<String> response = client.exchange(requestEntity, String.class);
 		String message = response.getStatusCodeValue() == 201 ? "Employee Created Successfully" : "Employee Creation Failed";
 		System.out.println(message);
-		System.out.println("Employee URI:" + response.getHeaders().getLocation());
+		String path = response.getHeaders().getLocation().getPath();
+		System.out.println("Employee URI:" + path.substring(path.lastIndexOf("/") + 1));
 	}
 	
 	private static void listEmployees() throws URISyntaxException

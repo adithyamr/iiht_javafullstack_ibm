@@ -15,8 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.examples.spring.hibernate.Item;
 import com.examples.spring.hibernate.Order;
 
-
-
 @ContextConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 public class OrderPersistenceTests {
@@ -64,8 +62,7 @@ public class OrderPersistenceTests {
 		// Otherwise the query returns the existing order (and we didn't set the
 		// parent in the item)...
 		session.clear();
-		Order other = (Order) session
-				.createQuery( "select o from Order o join o.items i where i.product=:product")
+		Order other = (Order) session.createQuery("select o from Order o join o.items i where i.product=:product")
 				.setString("product", "foo").uniqueResult();
 		assertEquals(1, other.getItems().size());
 		assertEquals(other, other.getItems().iterator().next().getOrder());
