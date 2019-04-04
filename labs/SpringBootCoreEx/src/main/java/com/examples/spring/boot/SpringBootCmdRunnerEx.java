@@ -9,7 +9,7 @@ import org.springframework.context.ApplicationContext;
 import com.examples.spring.boot.config.ApplicationConfig;
 
 // Uncomment @SpringBootApplication annotation to test CommandLineRunner example
-@SpringBootApplication
+//@SpringBootApplication
 public class SpringBootCmdRunnerEx implements CommandLineRunner 
 {
 	
