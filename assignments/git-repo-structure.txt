@@ -3,6 +3,8 @@ ibm-fsd-frontend
 	|____	labs
 	|
 	|____ 	assignments
+		    |
+		    |___ EmployeeManagementApp
 
 ibm-fsd-backend
 	|
@@ -67,9 +69,12 @@ ibm-fsd-backend
 					|__ MVC					
 						|
 						|___ EmployeeManagementApp05
-						
+					|
+					|
+					|__ REST
+						|
+						|___ EmployeeManagementService
 				|
-				|__SpringBoot
 				|
 				|__SpringCloud
 	

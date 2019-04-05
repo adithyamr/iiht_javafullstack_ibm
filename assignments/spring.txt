@@ -12,3 +12,7 @@ ASSIGNMENT 1: Enhance Spring MVC Employee Management webapp with below features
 		   a) Allow users to register in the application and authenticate based on that
 		   b) Implement form validation using Bean Validation API
 		   c) Configure to use ResourceBundle ViewResolver
+		   
+[SPRING REST]
+=============
+ASSIGNMENT 1: Develop Employee Management UI in Angular and integrate with Employee Management REST service (Spring)
