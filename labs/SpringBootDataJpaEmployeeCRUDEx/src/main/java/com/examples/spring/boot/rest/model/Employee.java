@@ -104,4 +104,9 @@ public class Employee {
 	public void setCountry(String country) {
 		this.country = country;
 	}
+	
+	public String toString()
+	{
+		return this.getId() + " " + this.getName();
+	}
 }

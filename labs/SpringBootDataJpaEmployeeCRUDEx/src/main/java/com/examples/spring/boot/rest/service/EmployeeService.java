@@ -30,6 +30,11 @@ public class EmployeeService {
 	public void delete(int empId) {
 		employeeRepo.delete(employeeRepo.findById(empId).get());
 	}
+	
+	public List<Employee> getEmployeesByDept(String dept)
+	{
+		return employeeRepo.findByDepartment(dept);
+	}
 
 	public List<Employee> list() {
 		List<Employee> employees = new ArrayList<>();

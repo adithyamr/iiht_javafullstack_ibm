@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.examples.spring.boot.rest.model.Employee;
@@ -38,9 +39,12 @@ public class EmployeeController {
 	}
 	
 	@GetMapping
-	public List<Employee> getAll()
+	public List<Employee> getAll(@RequestParam(required=false) String dept)
 	{
-		return empService.list();
+		if(dept != null)
+			return empService.getEmployeesByDept(dept);
+		else
+			return empService.list();
 	}	
 
 	@PutMapping("/{id}")
