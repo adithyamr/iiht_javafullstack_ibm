@@ -9,6 +9,8 @@
 	Registration Successful!  
 </h1>
 
-<P>  Username is ${username} </P>
+<P>  Username is ${user.username} </P>
+<P>  Country is ${user.country} </P>
+<p> <a href="/SpringMVCRegistrationEx/login">Login</a>
 </body>
 </html>
