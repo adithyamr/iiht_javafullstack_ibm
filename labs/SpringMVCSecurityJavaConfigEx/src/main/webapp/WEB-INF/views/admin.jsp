@@ -2,17 +2,16 @@
 <%@ page session="false"%>
 <html>
 <head>
-<title>Home</title>
+<title>Admin</title>
 </head>
 <body>
 	<div class="container">
-		<h1>This is secured!</h1>
+		<h1>Admin Page!</h1>
 		<p>
 			Hello <b><c:out value="${pageContext.request.remoteUser}" /></b>
 		</p>
 
 		<c:url value="/logout" var="logoutUrl" />
-		<c:url value="/admin" var="adminUrl" />
 		<form action="${logoutUrl}" method="post" id="logoutForm">
 			<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
@@ -22,9 +21,11 @@
 				document.getElementById("logoutForm").submit();
 			}
 		</script>
+		
+		<p> ${pageContext.request.userPrincipal} </p>		
 
 		<c:if test="${pageContext.request.userPrincipal.name != null}">
-			<p><a href="${adminUrl}"> Admin </a> | <a href="javascript:formSubmit()"> Logout</a></p>
+			<p> <a href="javascript:formSubmit()"> Logout</a> </p>
 		</c:if>
 
 		<P>The time on the server is ${serverTime}.</P>
