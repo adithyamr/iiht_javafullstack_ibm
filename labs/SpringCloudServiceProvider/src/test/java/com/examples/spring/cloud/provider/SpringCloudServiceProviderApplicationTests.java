@@ -1,4 +1,4 @@
-package com.examples.spring.cloud.registry;
+package com.examples.spring.cloud.provider;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
