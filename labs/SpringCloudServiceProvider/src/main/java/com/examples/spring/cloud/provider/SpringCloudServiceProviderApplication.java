@@ -1,4 +1,4 @@
-package com.examples.spring.cloud.registry;
+package com.examples.spring.cloud.provider;
 
 import javax.xml.ws.RequestWrapper;
 
@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @EnableEurekaClient
 @RestController
-public class SpringCloudRegistryClientApplication {
+public class SpringCloudServiceProviderApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringCloudRegistryClientApplication.class, args);
+		SpringApplication.run(SpringCloudServiceProviderApplication.class, args);
 	}
 
 	@GetMapping("/")
